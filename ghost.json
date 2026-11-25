@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 3,
+  "minCindyVersion": "0.1.145",
+  "id": "omp-harness",
+  "name": "OMP Harness",
+  "description": "把本机 omp CLI 作为 Cindy 任务执行引擎（ACP）。",
+  "whenToUse": "当用户希望用本机 omp 作为 Cindy 的任务执行引擎，或把任务交给 OMP ACP 处理时。",
+  "icon": "assets/icon.png",
+  "version": "1.0.0",
+  "kind": "chip",
+  "entry": "main.js",
+  "settingsHtml": "settings.html",
+  "node": {
+    "entry": "node/worker.cjs",
+    "protocol": "json-rpc-stdio",
+    "lifecycle": "on-demand",
+    "idleTimeoutSeconds": 120,
+    "entries": [
+      "node/acp.cjs"
+    ]
+  },
+  "harnesses": [
+    {
+      "id": "omp",
+      "name": "OMP ACP",
+      "description": "在本机运行 omp acp，由 Cindy 统一驱动 ACP 会话。",
+      "protocol": "acp",
+      "entry": "node/acp.cjs",
+      "locales": {
+        "zh-CN": {
+          "name": "OMP ACP",
+          "description": "在本机运行 omp acp，由 Cindy 统一驱动 ACP 会话。"
+        }
+      }
+    }
+  ]
+}
